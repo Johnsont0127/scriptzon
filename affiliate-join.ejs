@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Become an Affiliate | Scriptli</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <main class="main-content">
+      <div class="content-wrapper">
+        <div class="page-header">
+          <h1>Become an Affiliate</h1>
+        </div>
+        
+        <% if(error_msg != '') { %>
+          <div class="alert alert-danger">
+            <%= error_msg %>
+          </div>
+        <% } %>
+        
+        <div class="account-section">
+          <h2>Join Our Affiliate Program</h2>
+          <p>Earn 30% recurring commission on every subscription from users you refer to Scriptli!</p>
+          
+          <div class="affiliate-benefits">
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-percentage"></i>
+              </div>
+              <div class="benefit-content">
+                <h3>30% Recurring Commission</h3>
+                <p>Earn 30% of every payment your referrals make, for as long as they remain subscribed.</p>
+              </div>
+            </div>
+            
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-money-bill-wave"></i>
+              </div>
+              <div class="benefit-content">
+                <h3>Lifetime Earnings</h3>
+                <p>Get paid for the entire lifetime of your referred customers' subscriptions.</p>
+              </div>
+            </div>
+            
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-link"></i>
+              </div>
+              <div class="benefit-content">
+                <h3>Easy Sharing</h3>
+                <p>Get your unique referral link and share it on social media, email, or your website.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="commission-examples">
+            <h3>Potential Earnings</h3>
+            <div class="example-grid">
+              <div class="example-card">
+                <div class="example-header">5 Referrals</div>
+                <div class="example-body">
+                  <p>Monthly Plan: <strong>$28.50/month</strong></p>
+                  <p>Annual Plan: <strong>$148.50/year</strong></p>
+                </div>
+              </div>
+              
+              <div class="example-card">
+                <div class="example-header">10 Referrals</div>
+                <div class="example-body">
+                  <p>Monthly Plan: <strong>$57.00/month</strong></p>
+                  <p>Annual Plan: <strong>$297.00/year</strong></p>
+                </div>
+              </div>
+              
+              <div class="example-card">
+                <div class="example-header">20 Referrals</div>
+                <div class="example-body">
+                  <p>Monthly Plan: <strong>$114.00/month</strong></p>
+                  <p>Annual Plan: <strong>$594.00/year</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="affiliate-join-cta">
+            <form action="/affiliates/join" method="POST">
+              <button type="submit" class="btn btn-primary btn-large">Join Affiliate Program</button>
+            </form>
+          </div>
+        </div>
+        
+        <div class="account-section">
+          <h2>How It Works</h2>
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3>Join the Program</h3>
+                <p>Click the button above to join our affiliate program and get your unique referral link.</p>
+              </div>
+            </div>
+            
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3>Share Your Link</h3>
+                <p>Share your referral link with your audience through social media, email, or your website.</p>
+              </div>
+            </div>
+            
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3>Earn Commissions</h3>
+                <p>When someone signs up and subscribes through your link, you earn 30% of their subscription fee.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="account-section">
+          <h2>Affiliate FAQ</h2>
+          <div class="faq-grid">
+            <div class="faq-item">
+              <h3>When do I get paid?</h3>
+              <p>Commissions are calculated at the end of each month and paid out by the 15th of the following month.</p>
+            </div>
+            
+            <div class="faq-item">
+              <h3>Is there a minimum payout threshold?</h3>
+              <p>Yes, you need to earn at least $50 in commissions before a payout is processed.</p>
+            </div>
+            
+            <div class="faq-item">
+              <h3>How long does the referral cookie last?</h3>
+              <p>Our referral cookies last for 30 days, giving your referrals plenty of time to sign up.</p>
+            </div>
+            
+            <div class="faq-item">
+              <h3>Can I promote Scriptli on multiple platforms?</h3>
+              <p>Yes! You can share your referral link on any platform where you have an audience.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

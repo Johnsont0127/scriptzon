@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Script | Scriptli</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <main class="main-content">
+      <div class="content-wrapper">
+        <% if(error_msg != '') { %>
+          <div class="alert alert-danger">
+            <%= error_msg %>
+          </div>
+        <% } %>
+        
+        <div class="script-generator">
+          <h2>Generate New Script</h2>
+          <p>Fill in the details below to create your Amazon product video script</p>
+          
+          <form id="script-generator-form" action="/scripts/generate" method="POST">
+            <div class="form-group">
+              <label for="title">Script Title</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                class="form-control"
+                placeholder="E.g., Wireless Earbuds Promo"
+                required
+              />
+            </div>
+            
+            <div class="form-group">
+              <label for="productName">Product Name</label>
+              <input
+                type="text"
+                id="productName"
+                name="productName"
+                class="form-control"
+                placeholder="E.g., SoundCore Wireless Earbuds"
+                required
+              />
+            </div>
+            
+            <div class="form-group">
+              <label>Tone</label>
+              <div class="radio-group">
+                <div class="radio-option">
+                  <input type="radio" id="casual" name="tone" value="casual" checked>
+                  <label for="casual">Casual</label>
+                </div>
+                <div class="radio-option">
+                  <input type="radio" id="professional" name="tone" value="professional">
+                  <label for="professional">Professional</label>
+                </div>
+                <div class="radio-option">
+                  <input type="radio" id="funny" name="tone" value="funny">
+                  <label for="funny">Funny</label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="highlights">Product Highlights</label>
+              <textarea
+                id="highlights"
+                name="highlights"
+                class="form-control"
+                placeholder="List the key features and benefits of the product (one per line)"
+                required
+              ></textarea>
+              <small>Include 3-5 key points that make this product special</small>
+            </div>
+            
+            <% if(user.subscription.plan === 'free') { %>
+              <div class="script-limit-info">
+                <p>You have used <%= user.scriptCount.count %> of 3 scripts this month</p>
+                <div class="progress-bar">
+                  <div class="progress" style="width: <%= (user.scriptCount.count / 3) * 100 %>%"></div>
+                </div>
+                <% if(user.scriptCount.count >= 3) { %>
+                  <p class="limit-warning">You've reached your monthly limit. <a href="/pricing">Upgrade to Pro</a> for unlimited scripts.</p>
+                <% } %>
+              </div>
+            <% } %>
+            
+            <button type="submit" class="btn btn-primary btn-large" <%= user.subscription.plan === 'free' && user.scriptCount.count >= 3 ? 'disabled' : '' %>>
+              Generate Script
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
