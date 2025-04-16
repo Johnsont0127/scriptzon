@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/dashboard-extras.css">
+  <link rel="stylesheet" href="/css/bonus-features.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">ScriptZon</div>
+        <button class="menu-toggle" id="menu-toggle">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/dashboard" class="nav-item <%= path === '/dashboard' ? 'active' : '' %>">
+          <i class="fas fa-home"></i> Dashboard
+        </a>
+        <a href="/scripts/generate" class="nav-item <%= path === '/scripts/generate' ? 'active' : '' %>">
+          <i class="fas fa-magic"></i> Generate Script
+        </a>
+        <a href="/scripts" class="nav-item <%= path === '/scripts' ? 'active' : '' %>">
+          <i class="fas fa-file-alt"></i> My Scripts
+        </a>
+        <a href="/account" class="nav-item <%= path === '/account' ? 'active' : '' %>">
+          <i class="fas fa-user"></i> Account
+        </a>
+        <a href="/refer-friend" class="nav-item <%= path === '/refer-friend' ? 'active' : '' %>">
+          <i class="fas fa-user-plus"></i> Refer a Friend
+        </a>
+        <% if (user.affiliate && user.affiliate.isAffiliate) { %>
+          <a href="/affiliates/dashboard" class="nav-item <%= path === '/affiliates/dashboard' ? 'active' : '' %>">
+            <i class="fas fa-chart-line"></i> Affiliate Dashboard
+          </a>
+        <% } else { %>
+          <a href="/affiliates/join" class="nav-item <%= path === '/affiliates/join' ? 'active' : '' %>">
+            <i class="fas fa-handshake"></i> Become an Affiliate
+          </a>
+        <% } %>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar">
+            <%= user.name.charAt(0).toUpperCase() %>
+          </div>
+          <div class="user-details">
+            <div class="user-name"><%= user.name %></div>
+            <div class="user-plan"><%= user.subscription.plan.charAt(0).toUpperCase() + user.subscription.plan.slice(1) %> Plan</div>
+          </div>
+        </div>
+        <a href="/users/logout" class="nav-item">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </div>
+    </aside>
+    
+    <button class="menu-toggle" id="open-menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <main class="main-content">
+      <div class="content-wrapper">
+        <% if(success_msg != '') { %>
+          <div class="alert alert-success">
+            <%= success_msg %>
+          </div>
+        <% } %>
+        
+        <% if(error_msg != '') { %>
+          <div class="alert alert-danger">
+            <%= error_msg %>
+          </div>
+        <% } %>
+        
+        <%- body %>
+      </div>
+    </main>
+    
+    <!-- First-time user onboarding popup -->
+    <% if (typeof firstTimeUser !== 'undefined' && firstTimeUser) { %>
+      <div class="onboarding-popup" id="onboarding-popup">
+        <div class="onboarding-content">
+          <button class="close-onboarding" id="close-onboarding">
+            <i class="fas fa-times"></i>
+          </button>
+          <div class="onboarding-header">
+            <h2>Welcome to ScriptZon!</h2>
+            <p>Let's get you started with creating amazing video scripts for your Amazon products.</p>
+          </div>
+          <div class="onboarding-steps">
+            <div class="onboarding-step">
+              <div class="onboarding-step-number">1</div>
+              <div class="onboarding-step-content">
+                <h3>Generate Your First Script</h3>
+                <p>Click on "Generate Script" in the sidebar to create your first AI-powered video script.</p>
+              </div>
+            </div>
+            <div class="onboarding-step">
+              <div class="onboarding-step-number">2</div>
+              <div class="onboarding-step-content">
+                <h3>Customize Your Script</h3>
+                <p>Enter your product details, select a tone, and add key highlights to generate the perfect script.</p>
+              </div>
+            </div>
+            <div class="onboarding-step">
+              <div class="onboarding-step-number">3</div>
+              <div class="onboarding-step-content">
+                <h3>Save and Share</h3>
+                <p>Save your scripts, download them, or copy directly to your clipboard for use in your videos.</p>
+              </div>
+            </div>
+          </div>
+          <div class="onboarding-footer">
+            <a href="/scripts/generate" class="btn btn-primary">Create Your First Script</a>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/bonus-features.js"></script>
+</body>
+</html>

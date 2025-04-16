@@ -1,0 +1,391 @@
+/* Additional styles for bonus features with Amazon-inspired color palette */
+:root {
+  --primary: #FF9900; /* Amazon Gold */
+  --accent: #0F0F0F; /* Jet Black */
+  --background: #FAFAFA; /* Snow White */
+  --card-bg: #F3F4F6; /* Soft Gray */
+  --text: #1F2937; /* Charcoal Gray */
+  --text-light: #6B7280; /* Light Gray for secondary text */
+  --success: #10B981; /* Green */
+  --danger: #EF4444; /* Red */
+  --warning: #F59E0B; /* Amber */
+  --info: #3B82F6; /* Blue */
+  --border: #E5E7EB; /* Border color */
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --radius: 8px; /* Border radius */
+}
+
+/* First-time user onboarding popup */
+.onboarding-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 15, 15, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.onboarding-content {
+  background-color: white;
+  border-radius: var(--radius);
+  max-width: 600px;
+  width: 90%;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.close-onboarding {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: color 0.3s ease;
+}
+
+.close-onboarding:hover {
+  color: var(--accent);
+}
+
+.onboarding-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.onboarding-header h2 {
+  margin-bottom: 15px;
+  color: var(--accent);
+  font-size: 1.8rem;
+}
+
+.onboarding-header p {
+  color: var(--text-light);
+}
+
+.onboarding-steps {
+  margin-bottom: 40px;
+}
+
+.onboarding-step {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.onboarding-step-number {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary);
+  color: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin-right: 20px;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}
+
+.onboarding-step-content h3 {
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.onboarding-step-content p {
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.onboarding-footer {
+  text-align: center;
+}
+
+/* Refer-a-friend section styles */
+.referral-link-box {
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.referral-link-box p {
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.referral-link-input {
+  display: flex;
+}
+
+.referral-link-input input {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius) 0 0 var(--radius);
+  font-size: 1rem;
+  background-color: white;
+  color: var(--text);
+}
+
+.referral-link-input button {
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background-color: var(--accent);
+  color: var(--primary);
+  border: 2px solid var(--accent);
+  padding: 0 20px;
+  font-weight: 600;
+}
+
+.referral-link-input button:hover {
+  background-color: black;
+}
+
+.referral-rewards {
+  margin-top: 25px;
+}
+
+.referral-rewards h3 {
+  margin-bottom: 15px;
+  color: var(--accent);
+}
+
+.referral-rewards ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.referral-rewards li {
+  margin-bottom: 12px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.referral-info {
+  background-color: #FFF8E6;
+  color: var(--accent);
+  padding: 20px;
+  border-radius: var(--radius);
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  border-left: 4px solid var(--primary);
+}
+
+.referral-info i {
+  margin-right: 15px;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+/* Social sharing buttons */
+.social-share {
+  margin-top: 30px;
+}
+
+.social-share h3 {
+  margin-bottom: 15px;
+  color: var(--accent);
+}
+
+.social-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-twitter {
+  background-color: #1DA1F2;
+  border-color: #1DA1F2;
+  color: white;
+}
+
+.btn-twitter:hover {
+  background-color: #0C85D0;
+  border-color: #0C85D0;
+}
+
+.btn-facebook {
+  background-color: #4267B2;
+  border-color: #4267B2;
+  color: white;
+}
+
+.btn-facebook:hover {
+  background-color: #365899;
+  border-color: #365899;
+}
+
+.btn-email {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--primary);
+}
+
+.btn-email:hover {
+  background-color: black;
+  border-color: black;
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-badge.pending {
+  background-color: #FFF8E6;
+  color: #92400E;
+}
+
+.status-badge.active {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.status-badge.cancelled {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+}
+
+.status-badge.paid {
+  background-color: #EFF6FF;
+  color: #1E40AF;
+}
+
+/* Table responsive */
+.table-responsive {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+/* Success and Cancel Pages */
+.result-page {
+  text-align: center;
+  padding: 80px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.result-icon {
+  font-size: 5rem;
+  margin-bottom: 30px;
+}
+
+.result-icon.success {
+  color: var(--primary);
+}
+
+.result-icon.cancel {
+  color: var(--danger);
+}
+
+.result-page h1 {
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.result-page p {
+  margin-bottom: 40px;
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* Empty state styling */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state-icon {
+  font-size: 3.5rem;
+  color: var(--primary);
+  margin-bottom: 25px;
+  opacity: 0.8;
+}
+
+.empty-state h3 {
+  margin-bottom: 15px;
+  color: var(--accent);
+  font-size: 1.5rem;
+}
+
+.empty-state p {
+  margin-bottom: 25px;
+  color: var(--text-light);
+}
+
+/* Script limit info */
+.script-limit-info {
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  margin: 25px 0;
+}
+
+.limit-warning {
+  color: var(--danger);
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+.limit-warning a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .social-buttons {
+    flex-direction: column;
+  }
+  
+  .referral-link-input {
+    flex-direction: column;
+  }
+  
+  .referral-link-input input {
+    border-radius: var(--radius) var(--radius) 0 0;
+    margin-bottom: -1px;
+  }
+  
+  .referral-link-input button {
+    border-radius: 0 0 var(--radius) var(--radius);
+    width: 100%;
+    padding: 12px 0;
+  }
+  
+  .onboarding-content {
+    padding: 30px 20px;
+  }
+  
+  .onboarding-step {
+    flex-direction: column;
+  }
+  
+  .onboarding-step-number {
+    margin-bottom: 15px;
+    margin-right: 0;
+  }
+}

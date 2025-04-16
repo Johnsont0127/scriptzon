@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing | ScriptZon</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <section class="pricing-page">
+    <div class="container">
+      <h1>Choose Your Plan</h1>
+      <p class="section-subtitle">Select the plan that works best for you</p>
+      
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>Free</h3>
+            <div class="price">$0<span>/month</span></div>
+          </div>
+          <div class="pricing-features">
+            <ul>
+              <li><i class="fas fa-check"></i> 3 scripts per month</li>
+              <li><i class="fas fa-check"></i> Basic script generation</li>
+              <li><i class="fas fa-check"></i> Copy & download scripts</li>
+              <li><i class="fas fa-check"></i> Save to dashboard</li>
+              <li class="disabled"><i class="fas fa-times"></i> Unlimited scripts</li>
+              <li class="disabled"><i class="fas fa-times"></i> Priority support</li>
+            </ul>
+          </div>
+          <div class="pricing-cta">
+            <% if(!user) { %>
+              <a href="/users/register" class="btn btn-outline btn-block">Start Free</a>
+            <% } else if(user.subscription.plan === 'free') { %>
+              <button class="btn btn-outline btn-block" disabled>Current Plan</button>
+            <% } else { %>
+              <form action="/payments/cancel-subscription" method="POST">
+                <button type="submit" class="btn btn-outline btn-block">Downgrade</button>
+              </form>
+            <% } %>
+          </div>
+        </div>
+        
+        <div class="pricing-card popular">
+          <div class="popular-tag">Most Popular</div>
+          <div class="pricing-header">
+            <h3>Pro Monthly</h3>
+            <div class="price">$19<span>/month</span></div>
+          </div>
+          <div class="pricing-features">
+            <ul>
+              <li><i class="fas fa-check"></i> <strong>Unlimited</strong> scripts</li>
+              <li><i class="fas fa-check"></i> Advanced script generation</li>
+              <li><i class="fas fa-check"></i> Copy & download scripts</li>
+              <li><i class="fas fa-check"></i> Save to dashboard</li>
+              <li><i class="fas fa-check"></i> Priority support</li>
+              <li><i class="fas fa-check"></i> Cancel anytime</li>
+            </ul>
+          </div>
+          <div class="pricing-cta">
+            <% if(!user) { %>
+              <a href="/users/register" class="btn btn-primary btn-block">Choose Monthly</a>
+            <% } else if(user.subscription.plan === 'pro_monthly') { %>
+              <button class="btn btn-primary btn-block" disabled>Current Plan</button>
+            <% } else if(user.subscription.plan === 'free') { %>
+              <form action="/payments/create-checkout-session/monthly" method="POST">
+                <button type="submit" class="btn btn-primary btn-block">Upgrade</button>
+              </form>
+            <% } else { %>
+              <form action="/payments/create-checkout-session/monthly" method="POST">
+                <button type="submit" class="btn btn-primary btn-block">Switch Plan</button>
+              </form>
+            <% } %>
+          </div>
+        </div>
+        
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>Pro Annual</h3>
+            <div class="price">$99<span>/year</span></div>
+            <div class="price-subtitle">Save $129 per year</div>
+          </div>
+          <div class="pricing-features">
+            <ul>
+              <li><i class="fas fa-check"></i> <strong>Unlimited</strong> scripts</li>
+              <li><i class="fas fa-check"></i> Advanced script generation</li>
+              <li><i class="fas fa-check"></i> Copy & download scripts</li>
+              <li><i class="fas fa-check"></i> Save to dashboard</li>
+              <li><i class="fas fa-check"></i> Priority support</li>
+              <li><i class="fas fa-check"></i> Best value (45% savings)</li>
+            </ul>
+          </div>
+          <div class="pricing-cta">
+            <% if(!user) { %>
+              <a href="/users/register" class="btn btn-outline btn-block">Choose Annual</a>
+            <% } else if(user.subscription.plan === 'pro_annual') { %>
+              <button class="btn btn-outline btn-block" disabled>Current Plan</button>
+            <% } else if(user.subscription.plan === 'free') { %>
+              <form action="/payments/create-checkout-session/annual" method="POST">
+                <button type="submit" class="btn btn-outline btn-block">Upgrade</button>
+              </form>
+            <% } else { %>
+              <form action="/payments/create-checkout-session/annual" method="POST">
+                <button type="submit" class="btn btn-outline btn-block">Switch Plan</button>
+              </form>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="pricing-faq">
+        <h2>Frequently Asked Questions</h2>
+        
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>How does the free plan work?</h3>
+            <p>The free plan gives you 3 script generations per month. Once you've used your monthly quota, you'll need to upgrade to a Pro plan for unlimited scripts or wait until next month for your free quota to reset.</p>
+          </div>
+          
+          <div class="faq-item">
+            <h3>Can I cancel my subscription anytime?</h3>
+            <p>Yes! You can cancel your subscription anytime from your account dashboard. Your Pro access will continue until the end of your billing period.</p>
+          </div>
+          
+          <div class="faq-item">
+            <h3>Do you offer refunds?</h3>
+            <p>We offer a 7-day money-back guarantee if you're not satisfied with your Pro subscription.</p>
+          </div>
+          
+          <div class="faq-item">
+            <h3>What payment methods do you accept?</h3>
+            <p>We accept all major credit cards through our secure payment processor, Stripe.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

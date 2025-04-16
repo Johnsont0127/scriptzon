@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= script.title %> | ScriptZon</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <main class="main-content">
+      <div class="content-wrapper">
+        <div class="page-header">
+          <a href="/scripts" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Scripts
+          </a>
+        </div>
+        
+        <% if(error_msg != '') { %>
+          <div class="alert alert-danger">
+            <%= error_msg %>
+          </div>
+        <% } %>
+        
+        <div class="script-display">
+          <div class="script-display-header">
+            <h1 class="script-display-title"><%= script.title %></h1>
+            <div class="script-display-actions">
+              <button class="btn btn-outline copy-script" data-id="<%= script._id %>">
+                <i class="fas fa-copy"></i> Copy
+              </button>
+              <a href="/scripts/<%= script._id %>/download" class="btn btn-outline">
+                <i class="fas fa-download"></i> Download
+              </a>
+              <form action="/scripts/<%= script._id %>/regenerate" method="POST" style="display: inline;">
+                <button type="submit" class="btn btn-primary" <%= user.subscription.plan === 'free' && user.scriptCount.count >= 3 ? 'disabled' : '' %>>
+                  <i class="fas fa-sync-alt"></i> Regenerate
+                </button>
+              </form>
+            </div>
+          </div>
+          
+          <div class="script-meta">
+            <span><i class="fas fa-tag"></i> <%= script.productName %></span>
+            <span><i class="fas fa-comment"></i> <%= script.tone %></span>
+            <span><i class="fas fa-calendar"></i> <%= new Date(script.createdAt).toLocaleDateString() %></span>
+          </div>
+          
+          <div class="script-content" id="script-content-<%= script._id %>">
+<%= script.content %>
+          </div>
+          
+          <div class="script-highlights">
+            <h3>Product Highlights</h3>
+            <p><%= script.highlights %></p>
+          </div>
+          
+          <% if(user.subscription.plan === 'free') { %>
+            <div class="script-limit-info">
+              <p>You have used <%= user.scriptCount.count %> of 3 scripts this month</p>
+              <div class="progress-bar">
+                <div class="progress" style="width: <%= (user.scriptCount.count / 3) * 100 %>%"></div>
+              </div>
+              <% if(user.scriptCount.count >= 3) { %>
+                <p class="limit-warning">You've reached your monthly limit. <a href="/pricing">Upgrade to Pro</a> for unlimited scripts.</p>
+              <% } %>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

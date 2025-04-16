@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refer a Friend | ScriptZon</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/bonus-features.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <main class="main-content">
+      <div class="content-wrapper">
+        <div class="page-header">
+          <h1>Refer a Friend</h1>
+        </div>
+        
+        <% if(success_msg != '') { %>
+          <div class="alert alert-success">
+            <%= success_msg %>
+          </div>
+        <% } %>
+        
+        <% if(error_msg != '') { %>
+          <div class="alert alert-danger">
+            <%= error_msg %>
+          </div>
+        <% } %>
+        
+        <div class="account-section">
+          <h2>Share ScriptZon with Your Friends</h2>
+          <p>Invite your friends to try ScriptZon and earn rewards when they sign up!</p>
+          
+          <div class="referral-link-box">
+            <p>Your unique referral link:</p>
+            <div class="referral-link-input">
+              <input type="text" id="referral-link" value="<%= process.env.BASE_URL %>/users/register?ref=<%= user.affiliate.referralCode %>" readonly>
+              <button id="copy-referral-link" class="btn btn-primary">Copy</button>
+            </div>
+          </div>
+          
+          <div class="social-share">
+            <h3>Share on Social Media</h3>
+            <div class="social-buttons">
+              <a href="https://twitter.com/intent/tweet?text=Generate%20AI-powered%20video%20scripts%20for%20Amazon%20products%20with%20ScriptZon!%20Try%20it%20here:%20<%= encodeURIComponent(process.env.BASE_URL + '/users/register?ref=' + user.affiliate.referralCode) %>" target="_blank" class="btn btn-twitter">
+                <i class="fab fa-twitter"></i> Twitter
+              </a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent(process.env.BASE_URL + '/users/register?ref=' + user.affiliate.referralCode) %>" target="_blank" class="btn btn-facebook">
+                <i class="fab fa-facebook"></i> Facebook
+              </a>
+              <a href="mailto:?subject=Generate%20AI-powered%20video%20scripts%20for%20Amazon%20products&body=Hey!%20I've%20been%20using%20ScriptZon%20to%20create%20amazing%20video%20scripts%20for%20my%20Amazon%20product%20reviews.%20Check%20it%20out:%20<%= encodeURIComponent(process.env.BASE_URL + '/users/register?ref=' + user.affiliate.referralCode) %>" class="btn btn-email">
+                <i class="fas fa-envelope"></i> Email
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="account-section">
+          <h2>Rewards</h2>
+          <div class="referral-rewards">
+            <ul>
+              <li><strong>Free Plan:</strong> +3 free scripts per successful referral</li>
+              <li><strong>Pro Plan:</strong> One month free for every 3 successful referrals</li>
+            </ul>
+            <p>A successful referral is counted when your friend signs up and subscribes to a Pro plan.</p>
+          </div>
+        </div>
+        
+        <div class="account-section">
+          <h2>Your Referrals</h2>
+          
+          <% if(user.affiliate.referrals && user.affiliate.referrals.length > 0) { %>
+            <div class="table-responsive">
+              <table class="referral-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Reward</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% user.affiliate.referrals.forEach(function(referral) { %>
+                    <tr>
+                      <td><%= new Date(referral.date).toLocaleDateString() %></td>
+                      <td><span class="status-badge <%= referral.status %>"><%= referral.status %></span></td>
+                      <td>
+                        <% if(referral.status === 'pending') { %>
+                          Pending
+                        <% } else if(user.subscription.plan === 'free') { %>
+                          +3 scripts
+                        <% } else { %>
+                          Counts toward free month
+                        <% } %>
+                      </td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+          <% } else { %>
+            <div class="empty-state">
+              <div class="empty-state-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3>No referrals yet</h3>
+              <p>Share your referral link to start earning rewards</p>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/bonus-features.js"></script>
+</body>
+</html>

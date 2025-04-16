@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | ScriptZon</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/auth.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="/" class="logo">ScriptZon</a>
+        <h1>Welcome Back</h1>
+        <p>Log in to your account to access your scripts</p>
+      </div>
+      
+      <% if(typeof errors != 'undefined') { %>
+        <div class="alert alert-danger">
+          <% errors.forEach(function(error) { %>
+            <%= error.msg %>
+          <% }); %>
+        </div>
+      <% } %>
+      
+      <% if(success_msg != '') { %>
+        <div class="alert alert-success">
+          <%= success_msg %>
+        </div>
+      <% } %>
+      
+      <% if(error_msg != '') { %>
+        <div class="alert alert-danger">
+          <%= error_msg %>
+        </div>
+      <% } %>
+      
+      <% if(error != '') { %>
+        <div class="alert alert-danger">
+          <%= error %>
+        </div>
+      <% } %>
+      
+      <form action="/users/login" method="POST" class="auth-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <a href="/users/forgot-password" class="forgot-password">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="/users/register">Sign up</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

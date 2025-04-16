@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | ScriptZon</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <main class="main-content">
+      <div class="content-wrapper">
+        <div class="dashboard-cards">
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>Scripts Created</h2>
+              <div class="dashboard-card-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+            </div>
+            <div class="dashboard-card-value"><%= scripts.length %></div>
+            <div class="dashboard-card-label">Total scripts</div>
+          </div>
+          
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>Subscription</h2>
+              <div class="dashboard-card-icon">
+                <i class="fas fa-crown"></i>
+              </div>
+            </div>
+            <div class="dashboard-card-value"><%= user.subscription.plan === 'free' ? 'Free' : (user.subscription.plan === 'pro_monthly' ? 'Pro Monthly' : 'Pro Annual') %></div>
+            <div class="dashboard-card-label">Current plan</div>
+          </div>
+          
+          <div class="dashboard-card">
+            <div class="dashboard-card-header">
+              <h2>Scripts Remaining</h2>
+              <div class="dashboard-card-icon">
+                <i class="fas fa-chart-pie"></i>
+              </div>
+            </div>
+            <div class="dashboard-card-value"><%= user.subscription.plan === 'free' ? (3 - user.scriptCount.count) : '∞' %></div>
+            <div class="dashboard-card-label"><%= user.subscription.plan === 'free' ? 'This month' : 'Unlimited' %></div>
+          </div>
+        </div>
+        
+        <div class="cta-center">
+          <a href="/scripts/generate" class="btn btn-primary btn-large">
+            <i class="fas fa-plus-circle"></i> Create New Script
+          </a>
+        </div>
+        
+        <div class="script-list">
+          <div class="script-list-header">
+            <h2>Recent Scripts</h2>
+            <a href="/scripts" class="btn btn-outline">View All</a>
+          </div>
+          
+          <div class="script-list-body">
+            <% if(scripts.length > 0) { %>
+              <% scripts.slice(0, 5).forEach(function(script) { %>
+                <div class="script-item" id="script-<%= script._id %>">
+                  <div class="script-item-header">
+                    <h3 class="script-item-title"><%= script.title %></h3>
+                    <span class="script-item-date"><%= new Date(script.createdAt).toLocaleDateString() %></span>
+                  </div>
+                  <div class="script-item-preview">
+                    <%= script.content.substring(0, 150) %>...
+                  </div>
+                  <div class="script-item-footer">
+                    <div class="script-item-meta">
+                      <span><i class="fas fa-tag"></i> <%= script.productName %></span>
+                      <span><i class="fas fa-comment"></i> <%= script.tone %></span>
+                    </div>
+                    <div class="script-item-actions">
+                      <a href="/scripts/<%= script._id %>" class="btn btn-outline btn-sm">View</a>
+                    </div>
+                  </div>
+                </div>
+              <% }); %>
+            <% } else { %>
+              <div class="empty-state">
+                <div class="empty-state-icon">
+                  <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>No scripts yet</h3>
+                <p>Create your first script to see it here</p>
+                <a href="/scripts/generate" class="btn btn-primary">Create Script</a>
+              </div>
+            <% } %>
+          </div>
+        </div>
+        
+        <!-- First-time user onboarding popup -->
+        <div id="onboarding-popup" class="onboarding-popup">
+          <div class="onboarding-content">
+            <button id="close-onboarding" class="close-onboarding">
+              <i class="fas fa-times"></i>
+            </button>
+            <div class="onboarding-header">
+              <h2>Welcome to ScriptZon!</h2>
+              <p>Let's get you started with your first AI-powered video script</p>
+            </div>
+            <div class="onboarding-steps">
+              <div class="onboarding-step">
+                <div class="onboarding-step-number">1</div>
+                <div class="onboarding-step-content">
+                  <h3>Create Your First Script</h3>
+                  <p>Click the "Create New Script" button to generate your first Amazon product video script.</p>
+                </div>
+              </div>
+              <div class="onboarding-step">
+                <div class="onboarding-step-number">2</div>
+                <div class="onboarding-step-content">
+                  <h3>Enter Product Details</h3>
+                  <p>Provide your product name, choose a tone, and add key highlights you want to feature.</p>
+                </div>
+              </div>
+              <div class="onboarding-step">
+                <div class="onboarding-step-number">3</div>
+                <div class="onboarding-step-content">
+                  <h3>Use Your Script</h3>
+                  <p>Copy, download, or save your script to use in your Amazon product videos.</p>
+                </div>
+              </div>
+            </div>
+            <div class="onboarding-footer">
+              <a href="/scripts/generate" class="btn btn-primary btn-large">Create Your First Script</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

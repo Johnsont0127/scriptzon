@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings | ScriptZon</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <main class="main-content">
+      <div class="content-wrapper">
+        <% if(success_msg != '') { %>
+          <div class="alert alert-success">
+            <%= success_msg %>
+          </div>
+        <% } %>
+        
+        <% if(error_msg != '') { %>
+          <div class="alert alert-danger">
+            <%= error_msg %>
+          </div>
+        <% } %>
+        
+        <div class="account-section">
+          <h2>Account Information</h2>
+          <form action="/users/account" method="POST" class="account-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                value="<%= user.name %>"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                value="<%= user.email %>"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Update Account</button>
+          </form>
+        </div>
+        
+        <div class="account-section">
+          <h2>Subscription</h2>
+          <div class="subscription-info">
+            <div class="subscription-details">
+              <h3><%= user.subscription.plan === 'free' ? 'Free Plan' : (user.subscription.plan === 'pro_monthly' ? 'Pro Monthly' : 'Pro Annual') %></h3>
+              <% if(user.subscription.plan === 'free') { %>
+                <p><%= 3 - user.scriptCount.count %> scripts remaining this month</p>
+              <% } else { %>
+                <p>Unlimited scripts</p>
+                <% if(user.subscription.endDate) { %>
+                  <p>Next billing date: <%= new Date(user.subscription.endDate).toLocaleDateString() %></p>
+                <% } %>
+              <% } %>
+            </div>
+            <div>
+              <% if(user.subscription.plan === 'free') { %>
+                <a href="/pricing" class="btn btn-primary">Upgrade Plan</a>
+              <% } else { %>
+                <a href="/payments/customer-portal" class="btn btn-outline">Manage Subscription</a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="account-section">
+          <h2>Refer a Friend</h2>
+          <p>Share ScriptZon with your friends and earn rewards!</p>
+          
+          <div class="referral-link-box">
+            <p>Your unique referral link:</p>
+            <div class="referral-link-input">
+              <input type="text" id="referral-link" value="<%= process.env.BASE_URL %>/users/register?ref=<%= user.affiliate.referralCode %>" readonly>
+              <button id="copy-referral-link" class="btn btn-primary">Copy</button>
+            </div>
+          </div>
+          
+          <div class="referral-rewards">
+            <h3>Rewards</h3>
+            <ul>
+              <li>Free Plan: +3 free scripts per successful referral</li>
+              <li>Pro Plan: One month free for every 3 successful referrals</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="account-section">
+          <h2>Password</h2>
+          <p>Want to change your password?</p>
+          <a href="/users/forgot-password" class="btn btn-outline">Reset Password</a>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
