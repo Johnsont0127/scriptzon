@@ -12,7 +12,7 @@ const path = require('path');
 const app = express();
 
 // Passport config
-require('./config/passport')(passport);
+const passportConfig = require('./config/passport');
 
 // DB Config
 const db = process.env.MONGO_URI || 'mongodb://localhost:27017/scriptli';
